@@ -302,4 +302,18 @@ public class DispatchService {
         
         return ride;
     }
+    
+    /**
+     * Get count of available drivers in specified area
+     */
+    public int getNearbyDriversCount(double lat, double lng, int radiusMeters) {
+        try {
+            List<DriverLocation> nearbyDrivers = geoIndexService.findNearbyDrivers(lat, lng, radiusMeters, 100);
+            return nearbyDrivers.size();
+        } catch (Exception e) {
+            logger.error("Error getting nearby drivers count for location ({}, {}) with radius {}", 
+                lat, lng, radiusMeters, e);
+            return 0;
+        }
+    }
 }

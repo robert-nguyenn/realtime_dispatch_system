@@ -147,6 +147,30 @@ public class GeoIndexService {
         }
     }
     
+    public List<DriverLocation> findNearbyDrivers(double lat, double lng, int radiusMeters, int maxDrivers) {
+        try {
+            // Convert radius from meters to kilometers for the gRPC call
+            double radiusKm = radiusMeters / 1000.0;
+            
+            FindNearestDriversRequest request = FindNearestDriversRequest.newBuilder()
+                    .setLat(lat)
+                    .setLng(lng)
+                    .setMaxDrivers(maxDrivers)
+                    .setMaxRadiusKm(radiusKm)
+                    .build();
+            
+            FindNearestDriversResponse response = blockingStub.findNearestDrivers(request);
+            logger.debug("Found {} drivers near ({}, {}) within {}m", 
+                        response.getDriversCount(), lat, lng, radiusMeters);
+            
+            return response.getDriversList();
+            
+        } catch (StatusRuntimeException e) {
+            logger.error("gRPC call failed when finding nearby drivers", e);
+            throw new RuntimeException("Failed to find nearby drivers", e);
+        }
+    }
+    
     private DriverStatus mapToGrpcStatus(String status) {
         return switch (status.toUpperCase()) {
             case "AVAILABLE" -> DriverStatus.AVAILABLE;

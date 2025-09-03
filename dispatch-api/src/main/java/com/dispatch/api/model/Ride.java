@@ -49,6 +49,9 @@ public class Ride {
     @Column(name = "estimated_duration_minutes")
     private Integer estimatedDurationMinutes;
     
+    @Column(name = "estimated_fare", precision = 10, scale = 2)
+    private BigDecimal estimatedFare;
+    
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -157,6 +160,9 @@ public class Ride {
     
     public Integer getEstimatedDurationMinutes() { return estimatedDurationMinutes; }
     public void setEstimatedDurationMinutes(Integer estimatedDurationMinutes) { this.estimatedDurationMinutes = estimatedDurationMinutes; }
+    
+    public BigDecimal getEstimatedFare() { return estimatedFare; }
+    public void setEstimatedFare(BigDecimal estimatedFare) { this.estimatedFare = estimatedFare; }
     
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
