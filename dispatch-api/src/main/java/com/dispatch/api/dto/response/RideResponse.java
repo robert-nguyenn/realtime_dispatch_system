@@ -7,16 +7,16 @@ import java.util.UUID;
 
 public class RideResponse {
     
-    private UUID id;
+    private String rideId;  // Changed from UUID id to String rideId
     private String riderId;
     private String driverId;
-    private BigDecimal pickupLat;
-    private BigDecimal pickupLng;
-    private BigDecimal destinationLat;
-    private BigDecimal destinationLng;
+    private String pickupLocation;
+    private String destinationLocation;
     private RideStatus status;
-    private BigDecimal fareAmount;
-    private Integer estimatedDurationMinutes;
+    private BigDecimal estimatedFare;
+    private BigDecimal actualFare;
+    private Integer estimatedDuration;
+    private Integer actualDuration;
     private LocalDateTime createdAt;
     private LocalDateTime acceptedAt;
     private LocalDateTime startedAt;
