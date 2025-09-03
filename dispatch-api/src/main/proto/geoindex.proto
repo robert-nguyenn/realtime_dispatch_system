@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package geoindex;
+
+option java_package = "com.dispatch.api.grpc";
+option java_outer_classname = "GeoIndexProto";
+
+// Service definition for geo-index operations
+service GeoIndexService {
+  // Find nearest drivers to a given location
+  rpc FindNearestDrivers(FindNearestDriversRequest) returns (FindNearestDriversResponse);
+  
+  // Update driver location in the geo-index
+  rpc UpdateDriverLocation(UpdateDriverLocationRequest) returns (UpdateDriverLocationResponse);
+  
+  // Remove driver from geo-index
+  rpc RemoveDriver(RemoveDriverRequest) returns (RemoveDriverResponse);
+  
+  // Get driver location
+  rpc GetDriverLocation(GetDriverLocationRequest) returns (GetDriverLocationResponse);
+}
+
+// Request to find nearest drivers
+message FindNearestDriversRequest {
+  double lat = 1;
+  double lng = 2;
+  int32 max_drivers = 3;
+  double max_radius_km = 4;
+}
+
+// Response with nearest drivers
+message FindNearestDriversResponse {
+  repeated DriverLocation drivers = 1;
+}
+
+// Request to update driver location
+message UpdateDriverLocationRequest {
+  string driver_id = 1;
+  double lat = 2;
+  double lng = 3;
+  DriverStatus status = 4;
+}
+
+// Response for location update
+message UpdateDriverLocationResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// Request to remove driver
+message RemoveDriverRequest {
+  string driver_id = 1;
+}
+
+// Response for driver removal
+message RemoveDriverResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// Request to get driver location
+message GetDriverLocationRequest {
+  string driver_id = 1;
+}
+
+// Response with driver location
+message GetDriverLocationResponse {
+  DriverLocation driver = 1;
+  bool found = 2;
+}
+
+// Driver location with distance
+message DriverLocation {
+  string driver_id = 1;
+  double lat = 2;
+  double lng = 3;
+  double distance_km = 4;
+  DriverStatus status = 5;
+  int64 last_update_timestamp = 6;
+}
+
+// Driver status enum
+enum DriverStatus {
+  OFFLINE = 0;
+  AVAILABLE = 1;
+  BUSY = 2;
+  EN_ROUTE = 3;
+}
