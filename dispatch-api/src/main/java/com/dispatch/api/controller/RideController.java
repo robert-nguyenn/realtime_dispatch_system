@@ -2,6 +2,7 @@ package com.dispatch.api.controller;
 
 import com.dispatch.api.dto.request.CreateRideRequest;
 import com.dispatch.api.dto.response.RideResponse;
+import com.dispatch.api.dto.mapper.RideMapper;
 import com.dispatch.api.model.Ride;
 import com.dispatch.api.model.RideStatus;
 import com.dispatch.api.repository.RideRepository;
