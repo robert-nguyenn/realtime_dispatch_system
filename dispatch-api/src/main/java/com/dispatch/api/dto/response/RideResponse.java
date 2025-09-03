@@ -27,8 +27,8 @@ public class RideResponse {
     public RideResponse() {}
     
     // Getters and Setters
-    public UUID getId() { return id; }
-    public void setId(UUID id) { this.id = id; }
+    public String getRideId() { return rideId; }
+    public void setRideId(String rideId) { this.rideId = rideId; }
     
     public String getRiderId() { return riderId; }
     public void setRiderId(String riderId) { this.riderId = riderId; }
@@ -36,26 +36,26 @@ public class RideResponse {
     public String getDriverId() { return driverId; }
     public void setDriverId(String driverId) { this.driverId = driverId; }
     
-    public BigDecimal getPickupLat() { return pickupLat; }
-    public void setPickupLat(BigDecimal pickupLat) { this.pickupLat = pickupLat; }
+    public String getPickupLocation() { return pickupLocation; }
+    public void setPickupLocation(String pickupLocation) { this.pickupLocation = pickupLocation; }
     
-    public BigDecimal getPickupLng() { return pickupLng; }
-    public void setPickupLng(BigDecimal pickupLng) { this.pickupLng = pickupLng; }
-    
-    public BigDecimal getDestinationLat() { return destinationLat; }
-    public void setDestinationLat(BigDecimal destinationLat) { this.destinationLat = destinationLat; }
-    
-    public BigDecimal getDestinationLng() { return destinationLng; }
-    public void setDestinationLng(BigDecimal destinationLng) { this.destinationLng = destinationLng; }
+    public String getDestinationLocation() { return destinationLocation; }
+    public void setDestinationLocation(String destinationLocation) { this.destinationLocation = destinationLocation; }
     
     public RideStatus getStatus() { return status; }
     public void setStatus(RideStatus status) { this.status = status; }
     
-    public BigDecimal getFareAmount() { return fareAmount; }
-    public void setFareAmount(BigDecimal fareAmount) { this.fareAmount = fareAmount; }
+    public BigDecimal getEstimatedFare() { return estimatedFare; }
+    public void setEstimatedFare(BigDecimal estimatedFare) { this.estimatedFare = estimatedFare; }
     
-    public Integer getEstimatedDurationMinutes() { return estimatedDurationMinutes; }
-    public void setEstimatedDurationMinutes(Integer estimatedDurationMinutes) { this.estimatedDurationMinutes = estimatedDurationMinutes; }
+    public BigDecimal getActualFare() { return actualFare; }
+    public void setActualFare(BigDecimal actualFare) { this.actualFare = actualFare; }
+    
+    public Integer getEstimatedDuration() { return estimatedDuration; }
+    public void setEstimatedDuration(Integer estimatedDuration) { this.estimatedDuration = estimatedDuration; }
+    
+    public Integer getActualDuration() { return actualDuration; }
+    public void setActualDuration(Integer actualDuration) { this.actualDuration = actualDuration; }
     
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }

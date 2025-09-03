@@ -1,4 +1,4 @@
-package com.dispatch.api.controller;
+package com.dispatch.api.dto.mapper;
 
 import com.dispatch.api.dto.response.RideResponse;
 import com.dispatch.api.model.Ride;
@@ -21,15 +21,24 @@ public class RideMapperImpl implements RideMapper {
 
         RideResponse rideResponse = new RideResponse();
 
+        if ( ride.getId() != null ) {
+            rideResponse.setRideId( ride.getId().toString() );
+        }
+        rideResponse.setStatus( ride.getStatus() );
+        rideResponse.setEstimatedFare( ride.getEstimatedFare() );
+        rideResponse.setActualFare( ride.getFareAmount() );
+        rideResponse.setEstimatedDuration( ride.getEstimatedDurationMinutes() );
         rideResponse.setAcceptedAt( ride.getAcceptedAt() );
         rideResponse.setCancelledAt( ride.getCancelledAt() );
         rideResponse.setCompletedAt( ride.getCompletedAt() );
         rideResponse.setCreatedAt( ride.getCreatedAt() );
         rideResponse.setDriverId( ride.getDriverId() );
-        rideResponse.setEstimatedFare( ride.getEstimatedFare() );
         rideResponse.setRiderId( ride.getRiderId() );
         rideResponse.setStartedAt( ride.getStartedAt() );
-        rideResponse.setStatus( ride.getStatus() );
+
+        rideResponse.setPickupLocation( formatLocation(ride.getPickupLat(), ride.getPickupLng()) );
+        rideResponse.setDestinationLocation( formatLocation(ride.getDestinationLat(), ride.getDestinationLng()) );
+        rideResponse.setActualDuration( calculateActualDuration(ride) );
 
         return rideResponse;
     }
