@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-03T15:38:05-0400",
+    date = "2025-09-03T15:41:21-0400",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.42.50.v20250729-0351, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
@@ -21,15 +21,15 @@ public class RideMapperImpl implements RideMapper {
 
         RideResponse rideResponse = new RideResponse();
 
-        rideResponse.setAcceptedAt( ride.getAcceptedAt() );
-        rideResponse.setCancelledAt( ride.getCancelledAt() );
-        rideResponse.setCompletedAt( ride.getCompletedAt() );
-        rideResponse.setCreatedAt( ride.getCreatedAt() );
-        rideResponse.setDriverId( ride.getDriverId() );
-        rideResponse.setEstimatedFare( ride.getEstimatedFare() );
         rideResponse.setRiderId( ride.getRiderId() );
-        rideResponse.setStartedAt( ride.getStartedAt() );
+        rideResponse.setDriverId( ride.getDriverId() );
         rideResponse.setStatus( ride.getStatus() );
+        rideResponse.setEstimatedFare( ride.getEstimatedFare() );
+        rideResponse.setCreatedAt( ride.getCreatedAt() );
+        rideResponse.setAcceptedAt( ride.getAcceptedAt() );
+        rideResponse.setStartedAt( ride.getStartedAt() );
+        rideResponse.setCompletedAt( ride.getCompletedAt() );
+        rideResponse.setCancelledAt( ride.getCancelledAt() );
 
         return rideResponse;
     }
