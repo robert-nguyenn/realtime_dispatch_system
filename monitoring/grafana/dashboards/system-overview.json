@@ -1,0 +1,115 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Dispatch System Overview",
+    "tags": ["dispatch", "overview"],
+    "timezone": "browser",
+    "refresh": "30s",
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "Active Rides",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(ride_requests_total) - sum(ride_completions_total)",
+            "legendFormat": "Active Rides"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "Available Drivers",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "geo_index_available_drivers",
+            "legendFormat": "Available"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0}
+      },
+      {
+        "id": 3,
+        "title": "Average Assignment Latency",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "rate(ride_assignment_duration_seconds_sum[5m]) / rate(ride_assignment_duration_seconds_count[5m])",
+            "legendFormat": "Avg Latency (s)"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0}
+      },
+      {
+        "id": 4,
+        "title": "Throughput (Rides/min)",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "rate(ride_requests_total[1m]) * 60",
+            "legendFormat": "Requests/min"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 6, "x": 18, "y": 0}
+      },
+      {
+        "id": 5,
+        "title": "Ride Status Distribution",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "sum by (status) (ride_status_count)",
+            "legendFormat": "{{status}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4}
+      },
+      {
+        "id": 6,
+        "title": "Driver Status Distribution",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "sum by (status) (driver_status_count)",
+            "legendFormat": "{{status}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4}
+      },
+      {
+        "id": 7,
+        "title": "Assignment Success Rate",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "rate(ride_assignments_successful_total[5m]) / rate(ride_requests_total[5m]) * 100",
+            "legendFormat": "Success Rate %"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12}
+      },
+      {
+        "id": 8,
+        "title": "API Response Times",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "P95"
+          },
+          {
+            "expr": "histogram_quantile(0.50, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "P50"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12}
+      }
+    ]
+  }
+}
