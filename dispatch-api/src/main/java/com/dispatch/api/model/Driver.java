@@ -38,6 +38,24 @@ public class Driver {
     @Column(name = "last_location_update")
     private LocalDateTime lastLocationUpdate;
     
+    @Column(name = "rating", precision = 3, scale = 2)
+    private BigDecimal rating = new BigDecimal("5.00");
+    
+    @Column(name = "total_rides")
+    private Integer totalRides = 0;
+    
+    @Column(name = "acceptance_rate", precision = 3, scale = 2)
+    private BigDecimal acceptanceRate = new BigDecimal("1.00");
+    
+    @Column(name = "experience_years")
+    private Integer experienceYears = 0;
+    
+    @Column(name = "vehicle_type")
+    private String vehicleType = "STANDARD";
+    
+    @Column(name = "total_earnings", precision = 10, scale = 2)
+    private BigDecimal totalEarnings = BigDecimal.ZERO;
+    
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -128,4 +146,31 @@ public class Driver {
     
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+    
+    public BigDecimal getRating() { return rating; }
+    public void setRating(BigDecimal rating) { this.rating = rating; }
+    
+    public Integer getTotalRides() { return totalRides; }
+    public void setTotalRides(Integer totalRides) { this.totalRides = totalRides; }
+    
+    public BigDecimal getAcceptanceRate() { return acceptanceRate; }
+    public void setAcceptanceRate(BigDecimal acceptanceRate) { this.acceptanceRate = acceptanceRate; }
+    
+    public Integer getExperienceYears() { return experienceYears; }
+    public void setExperienceYears(Integer experienceYears) { this.experienceYears = experienceYears; }
+    
+    public String getVehicleType() { return vehicleType; }
+    public void setVehicleType(String vehicleType) { this.vehicleType = vehicleType; }
+    
+    public BigDecimal getTotalEarnings() { return totalEarnings; }
+    public void setTotalEarnings(BigDecimal totalEarnings) { this.totalEarnings = totalEarnings; }
+    
+    // Helper methods for ETA service
+    public double getRatingAsDouble() {
+        return rating != null ? rating.doubleValue() : 5.0;
+    }
+    
+    public double getAcceptanceRateAsDouble() {
+        return acceptanceRate != null ? acceptanceRate.doubleValue() : 1.0;
+    }
 }
